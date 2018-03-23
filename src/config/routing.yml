@@ -1,0 +1,4 @@
+fred_app:
+    resource: "@FredAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
