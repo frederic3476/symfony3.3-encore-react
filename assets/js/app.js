@@ -4,8 +4,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//import tether from 'tether';
+//import bootstrap from 'bootstrap';
 
 import ItemCard from './Components/ItemCard';
+
 
 class App extends React.Component {
   constructor() {
