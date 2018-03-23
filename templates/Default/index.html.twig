@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-notice">
+        {{ message }}
+    </div>
+{% endfor %}
 <div id="root"></div>
+<a href="{{ path('new') }}">Ajouter un membre</a>
 <script type="text/javascript" 
     src="{{ asset('build/js/app.js') }}">
     </script>

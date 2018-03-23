@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
@@ -18,11 +19,12 @@ class Member
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
     */
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
     */
     private $avatarUrl;
 

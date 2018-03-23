@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Member;
+use App\Form\MemberType;
 
 
 class DefaultController extends Controller
@@ -66,5 +68,39 @@ class DefaultController extends Controller
         $members = $this->getDoctrine()->getRepository(Member::class)->findAll();
 
         return new Response($serializer->serialize($members, 'json'));
+    }
+    
+
+    /**
+     * @Route("/new", name="new")
+     */
+    public function newAction(Request $request)
+    {
+        $member = new Member();
+        $form = $this->createForm(MemberType::class, $member);
+
+        $form->handleRequest($request);
+
+        //submit form
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->addFlash(
+                'notice',
+                'Membre ajouté avec succès !!!'
+            );
+
+            // $form->getData() holds the submitted values
+            $member = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($member);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('Default/new.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }

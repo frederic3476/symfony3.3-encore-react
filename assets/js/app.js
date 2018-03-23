@@ -29,6 +29,10 @@ class App extends React.Component {
       });
   }
 
+  handleClick(i) {
+    alert(i);
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -39,8 +43,11 @@ class App extends React.Component {
                 key={id}
                 author={author}
                 title={title}
+                subtitle = 'toto'
                 avatarUrl={avatarUrl}
+                children = 'tata'
                 style={{ flex: 1, margin: 10 }}
+                onClick= {() => this.handleClick(id)}
               >
                 {description}
               </ItemCard>
